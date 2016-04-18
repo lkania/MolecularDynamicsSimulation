@@ -1,4 +1,4 @@
-package itba.edu.ar.simulation.output;
+package itba.edu.ar.simulation.output.info;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -7,11 +7,10 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-import itba.edu.ar.cellIndexMethod.CellIndexMethodObserver;
 import itba.edu.ar.cellIndexMethod.data.particle.Particle;
-import itba.edu.ar.simulation.brownianMovement.impl.BrownianMovementObserver;
+import itba.edu.ar.simulation.brownianMovement.observer.AbstractBrownianMovementObserver;
 
-public class BrownianMovementFileOutput implements BrownianMovementObserver {
+public class BrownianMovementFileOutput extends AbstractBrownianMovementObserver {
 
 	private static final String SEPARATOR = " ";
 	private static final String COLUMNS_FILE = "Properties=id:I:1:pos:R:2:color:R:3:disp:R:2";
@@ -73,7 +72,7 @@ public class BrownianMovementFileOutput implements BrownianMovementObserver {
 	}
 
 	private String getFileName() {
-		return "cellAutomataOffLace";
+		return "BrownianMovement";
 	}
 
 

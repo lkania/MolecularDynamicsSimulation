@@ -12,6 +12,7 @@ import itba.edu.ar.cellIndexMethod.route.routeImpl.OptimizedRoute;
 import itba.edu.ar.input.file.CellIndexMethodFileGenerator;
 import itba.edu.ar.input.file.data.StaticFileData;
 import itba.edu.ar.simulation.brownianMovement.AbstractBrownianMovement;
+import itba.edu.ar.simulation.brownianMovement.observer.BrownianMovementObserver;
 
 public class BrownianMovement extends AbstractBrownianMovement {
 
@@ -29,7 +30,7 @@ public class BrownianMovement extends AbstractBrownianMovement {
 	public BrownianMovement(double length, List<StaticFileData> staticFileDatas, String path)
 			throws InstantiationException, IllegalAccessException, IOException {
 		super();
-		this.length=length;
+		this.length = length;
 		this.staticFileDatas = staticFileDatas;
 		this.path = path;
 		generateWalls(length);
@@ -43,12 +44,12 @@ public class BrownianMovement extends AbstractBrownianMovement {
 		AverageParticleCollisionTime averageParticleCollisionTime = new AverageParticleCollisionTime(staticPaths.get(0),
 				dynamicPaths.get(0));
 		averageCollisionTime = averageParticleCollisionTime.getAverageCollisionTime(_COLLISIONS_);
-		
-		System.out.println("avg: "+averageCollisionTime);
 
 	}
 
 	public void simulate(int frames) throws InstantiationException, IllegalAccessException, IOException {
+
+		notifyAvgCollisionTime(averageCollisionTime);
 
 		int cellQuantity = getMaxCellQuantity();
 		IndexMatrix indexMatrix = IndexMatrixBuilder.getIndexMatrix(staticPaths.get(0), dynamicPaths.get(0),
@@ -61,11 +62,13 @@ public class BrownianMovement extends AbstractBrownianMovement {
 		Double minCollisionTime;
 
 		double timeBetweenFrames = averageCollisionTime * _COLLISIONS_PER_FRAME_;
+		notifySimulationDuration(timeBetweenFrames * frames);
+
 		int timelapse = 0;
 
 		for (int frame = 0; frame < frames; frame++) {
-			System.out.println("Frame: "+frame);
-			
+			System.out.println("Frame: " + frame);
+
 			for (double currentTime = 0; currentTime < timeBetweenFrames; currentTime += minCollisionTime) {
 
 				cellIndexMethod.execute();
@@ -77,10 +80,9 @@ public class BrownianMovement extends AbstractBrownianMovement {
 					notifyFrameEnded(timelapse, particles);
 					timelapse++;
 					currentTime = timeBetweenFrames;
-
 				} else {
-
 					calculateNextStep(minCollisionTime);
+					notifyCollisionTime(minCollisionTime);
 				}
 
 				indexMatrix.clear();
@@ -92,9 +94,25 @@ public class BrownianMovement extends AbstractBrownianMovement {
 
 	}
 
-	private void notifySimulationEnded() {
+	private void notifySimulationDuration(double totalTime) {
+		for (BrownianMovementObserver subscriber : subscribers)
+			subscriber.simulationDuration(totalTime);
+	}
+
+	private void notifyCollisionTime(double collisionTime) {
+		for (BrownianMovementObserver subscriber : subscribers)
+			subscriber.collisionTime(collisionTime);
+
+	}
+
+	private void notifySimulationEnded() throws IOException {
 		for (BrownianMovementObserver subscriber : subscribers)
 			subscriber.simulationEnded();
+	}
+
+	private void notifyAvgCollisionTime(double averageCollisionTime) {
+		for (BrownianMovementObserver subscriber : subscribers)
+			subscriber.avgCollisionTime(averageCollisionTime);
 	}
 
 	private double getInteractionRadio() {
@@ -118,7 +136,7 @@ public class BrownianMovement extends AbstractBrownianMovement {
 			subscriber.frameEnded(timelapse, particles);
 	}
 
-	public void Subscribe(BrownianMovementObserver subscriber) {
+	public void subscribe(BrownianMovementObserver subscriber) {
 		subscribers.add(subscriber);
 	}
 

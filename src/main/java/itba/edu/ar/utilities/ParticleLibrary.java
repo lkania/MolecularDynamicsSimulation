@@ -2,7 +2,6 @@ package itba.edu.ar.utilities;
 
 import itba.edu.ar.cellIndexMethod.data.particle.FloatPoint;
 import itba.edu.ar.cellIndexMethod.data.particle.Particle;
-import itba.edu.ar.data.Wall;
 
 public class ParticleLibrary {
 
