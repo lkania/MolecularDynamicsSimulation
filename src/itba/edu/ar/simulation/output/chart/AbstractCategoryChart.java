@@ -23,8 +23,9 @@ public class AbstractCategoryChart{
 	protected double rangeSize;
 	private String path;
 
-	public AbstractCategoryChart(String plotName, String yAxis, String xAxis, String serieName, double rangeSize) {
+	public AbstractCategoryChart(String plotName, String yAxis, String xAxis, String serieName, double rangeSize,String path) {
 		super();
+		this.path=path;
 		this.plotName = plotName;
 		this.yAxis = yAxis;
 		this.xAxis = xAxis;
