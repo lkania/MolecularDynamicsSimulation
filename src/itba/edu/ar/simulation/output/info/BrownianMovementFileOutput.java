@@ -13,7 +13,7 @@ import itba.edu.ar.simulation.brownianMovement.observer.AbstractBrownianMovement
 public class BrownianMovementFileOutput extends AbstractBrownianMovementObserver {
 
 	private static final String SEPARATOR = " ";
-	private static final String COLUMNS_FILE = "Properties=id:I:1:pos:R:2:color:R:3:disp:R:2";
+	private static final String COLUMNS_FILE = "Properties=id:I:1:pos:R:2:radius:I:1:mass:I:1:color:R:3:disp:R:2";
 	private String pathFolder;
 	private List<String> fileContent = new LinkedList<String>();
 	private double length;
