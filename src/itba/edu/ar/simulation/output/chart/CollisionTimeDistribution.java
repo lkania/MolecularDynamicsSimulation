@@ -16,7 +16,7 @@ public class CollisionTimeDistribution extends AbstractCategoryChart implements 
 	private static final String serieName = "All frames";
 
 	public CollisionTimeDistribution(double rangeSize,String path) {
-		super(plotName, yAxis, xAxis, serieName, rangeSize);
+		super(plotName, yAxis, xAxis, serieName, rangeSize,path);
 	}
 
 	public void frameEnded(int timeStep, List<Particle> particles) {
