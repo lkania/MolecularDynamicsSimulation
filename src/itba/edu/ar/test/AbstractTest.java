@@ -16,7 +16,7 @@ public abstract class AbstractTest {
 	
 	
 	protected List<StaticFileData> getstaticFileDatas() {
-		return getstaticFileDatasFromVelocity(0.1);
+		return getstaticFileDatasFromVelocity(0.05);
 	}
 
 	private List<StaticFileData> getstaticFileDatasFromVelocity(double velocityAbs) {
