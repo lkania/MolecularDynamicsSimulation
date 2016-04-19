@@ -23,10 +23,10 @@ public class BrownianMovementPaperTest extends AbstractTest {
 
 		BrownianMovement brownianMovement = new BrownianMovement(length, staticFileDatas, path);
 		brownianMovement.subscribe(new BrownianMovementFileOutput(path, length));
-		brownianMovement.subscribe(new VelocityDistribution(rangeSize, path).getBrownianMovementObserver());
-		brownianMovement.subscribe(new CollisionTimeDistribution(rangeSize, path));
-		brownianMovement.subscribe((new StatPrinter()).getBrownianMovementObserver());
-		brownianMovement.simulate(1000);
+		//brownianMovement.subscribe(new VelocityDistribution(rangeSize, path).getBrownianMovementObserver());
+		//brownianMovement.subscribe(new CollisionTimeDistribution(rangeSize, path));
+		//brownianMovement.subscribe((new StatPrinter()).getBrownianMovementObserver());
+		brownianMovement.simulate(500);
 
 	}
 
