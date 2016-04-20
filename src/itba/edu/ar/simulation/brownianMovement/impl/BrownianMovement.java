@@ -11,10 +11,10 @@ import itba.edu.ar.cellIndexMethod.data.particle.Particle;
 import itba.edu.ar.cellIndexMethod.route.routeImpl.OptimizedRoute;
 import itba.edu.ar.input.file.CellIndexMethodFileGenerator;
 import itba.edu.ar.input.file.data.StaticFileData;
-import itba.edu.ar.simulation.brownianMovement.AbstractBrownianMovement;
+import itba.edu.ar.simulation.brownianMovement.AbstractParticleCollision;
 import itba.edu.ar.simulation.brownianMovement.observer.BrownianMovementObserver;
 
-public class BrownianMovement extends AbstractBrownianMovement {
+public class BrownianMovement extends AbstractParticleCollision {
 
 	private static final int _COLLISIONS_PER_FRAME_ = 2;
 	private static final int _COLLISIONS_ = 1000;

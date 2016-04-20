@@ -13,7 +13,7 @@ import itba.edu.ar.test.AbstractTest;
 
 public class BrownianMovementPaperTest extends AbstractTest {
 
-	private static final int _TOTAL_FRAMES_ = 3000;
+	private static final int _TOTAL_FRAMES_ = 5000;
 	private static final double length = 0.5;
 	private static final double rangeSize = 0.01;
 	private static String path = System.getProperty("user.dir") + "/";
@@ -24,7 +24,7 @@ public class BrownianMovementPaperTest extends AbstractTest {
 
 		BrownianMovement brownianMovement = new BrownianMovement(length, staticFileDatas, path);
 		brownianMovement.subscribe(new BrownianMovementFileOutput(path, length));
-		brownianMovement.subscribe(new VelocityDistribution(rangeSize, path).getBrownianMovementObserver());
+		brownianMovement.subscribe(new VelocityDistribution(rangeSize, path,_TOTAL_FRAMES_).getBrownianMovementObserver());
 		brownianMovement.subscribe(new CollisionTimeDistribution(rangeSize, path));
 		brownianMovement.subscribe((new StatPrinter(path)).getBrownianMovementObserver());
 		brownianMovement.simulate(_TOTAL_FRAMES_);

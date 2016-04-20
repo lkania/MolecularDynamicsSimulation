@@ -8,9 +8,9 @@ import itba.edu.ar.cellIndexMethod.CellIndexMethod;
 import itba.edu.ar.cellIndexMethod.IndexMatrix;
 import itba.edu.ar.cellIndexMethod.IndexMatrixBuilder;
 import itba.edu.ar.cellIndexMethod.route.routeImpl.BruteForceRoute;
-import itba.edu.ar.simulation.brownianMovement.AbstractBrownianMovement;
+import itba.edu.ar.simulation.brownianMovement.AbstractParticleCollision;
 
-public class AverageParticleCollisionTime extends AbstractBrownianMovement {
+public class AverageParticleCollisionTime extends AbstractParticleCollision {
 
 	private static double BRUTE_FORCE_INTERACTION_RADIO = 1;
 	private List<Double> minCollisionTimes = new LinkedList<Double>();
